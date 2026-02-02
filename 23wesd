@@ -1,0 +1,4 @@
+This project builds a clean, leakage-safe machine learning pipeline to predict the number of completed credits (TC_HOANTHANH) for university students in the next semester.
+The model leverages historical academic records, admission information, and temporal feature engineering, combined with Explainable AI (XAI) techniques to ensure interpretability.
+
+The solution is designed for academic performance forecasting, student risk monitoring, and data-driven educational decision support.
