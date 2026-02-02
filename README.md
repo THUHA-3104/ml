@@ -1,6 +1,6 @@
 # Learning Progress Prediction – Academic Risk Management
 
-## 1. Project Overview
+## Project Overview
 This project aims to predict students’ learning progress by forecasting the number of credits completed (`TC_HOANTHANH`) at the end of a semester.  
 The primary objective is to support **early academic risk detection** and enable **proactive decision-making** in higher education management.
 
@@ -8,7 +8,7 @@ Instead of treating the task as a pure prediction problem, the project is design
 
 ---
 
-## 2. Dataset Description
+## Dataset Description
 The project uses three main datasets provided by the organizer:
 
 ### `admission.csv`
@@ -41,7 +41,7 @@ The project uses three main datasets provided by the organizer:
 
 ---
 
-## 3. Problem Formulation
+## Problem Formulation
 The task is formulated as a **regression problem**.
 Instead of predicting completed credits directly, the model predicts the **credit completion rate (pass rate)**:
 
@@ -53,58 +53,48 @@ This approach:
 Predicted pass rates are later converted back to completed credits.
 
 ---
+## Recommended modules
+The pipeline is modular by design. The following components are recommended to be kept when using or extending the system:
 
-## 4. Methodology and Pipeline
+1. Feature engineering module
+   Generates time-based historical features (lag, rolling statistics, cumulative statistics) while strictly preventing temporal data leakage.
 
-### 4.1 Time-aware Data Split
-To avoid data leakage and reflect real-world deployment, data is split strictly by time:
-- **Train**: 2020–2021 → HK1 2023–2024
-- **Validation**: HK2 2023–2024
-- **Test**: HK1 2024–2025
+2. Modeling module
 
-### 4.2 Feature Engineering
-Historical features are constructed per student using only past information:
-- Lag features (GPA, completed credits, pass rate)
-- Rolling statistics (mean, std)
-- Cumulative statistics (historical averages and sums)
-- Trend indicators (recent performance vs historical average)
-- Workload indicators (registered credits vs historical capacity)
-- Admission score gap (`DIEM_TRUNGTUYEN - DIEM_CHUAN`)
+   CatBoost Regressor as the primary nonlinear model
 
-All features are designed to be **time-safe** and deployment-ready.
+   Ridge Regression as a linear complementary model for stability
 
-### 4.3 Models
-Two complementary models are used:
-- **CatBoost Regressor** for capturing non-linear relationships and feature interactions
-- **Ridge Regression** as a stable linear baseline
+3. Explainability module
 
-Final predictions are obtained via **model blending**, where blending weights are optimized on the validation set.
+   CatBoost Feature Importance
 
----
+   SHAP for global explanations
 
-## 5. Academic Risk Scoring and Application
-The predicted pass rate serves as a **continuous Academic Risk Score** ranging from 0 to 1.  
-Students can be grouped into risk levels using adjustable business thresholds, for example:
-- High risk: pass rate < 0.70
-- Medium risk: 0.70–0.90
-- Low risk: ≥ 0.90
+   LIME for instance-level explanations
 
-Predictions are converted back to completed credits and clipped to ensure:
+Removing these modules may reduce prediction robustness or interpretability.
 
+## Installation
+Follow these steps to install and set up the project:
+1. Clone or download this repository to your local machine
+2. Install required Python packages
+3. Prepare the input data files
+4. Update file paths in the CONFIG section of the script:
 
-This design allows direct integration into academic management dashboards, enabling early identification of students who require closer monitoring or intervention.
+## Contributing
+After installation, follow these steps to run the pipeline
+1. Run the main script
+2. The pipeline will automatically:
+  Load and preprocess data
+  Generate historical and lag-based features
+  Apply BTC (Back-Time Consistent) train/validation split
+  Train CatBoost and Ridge models
+  Optimize blending weight using validation RMSE
+  Generate model explanations (Feature Importance, SHAP, LIME)
+  Retrain on full data and predict test set results
+3. The final prediction file will be saved
 
----
-
-## 6. Project Structure
-
----
-
-## 7. How to Run
-
-### Step 1: Install dependencies
-```bash
-pip install -r requirements.txt
-
-Instead of predicting completed credits directly, the model predicts the **credit completion rate (pass rate)**:
+## Maintainers
+### Step 1: 
 
