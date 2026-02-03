@@ -49,7 +49,8 @@ After installation, follow these steps to run the pipeline
 3. The final prediction file will be saved
 
 ## Contributing
-1. Fork the repository 
+1. Fork the repository
+
 2.Create a new branch:
    > git checkout -b feature/NewFeature
    
