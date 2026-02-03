@@ -39,23 +39,26 @@ Follow these steps to install and set up the project:
 After installation, follow these steps to run the pipeline
 1. Run the main script
 2. The pipeline will automatically:
-  Load and preprocess data
-  Generate historical and lag-based features
-  Apply BTC (Back-Time Consistent) train/validation split
-  Train CatBoost and Ridge models
-  Optimize blending weight using validation RMSE
-  Generate model explanations (Feature Importance, SHAP, LIME)
-  Retrain on full data and predict test set results
+  - Load and preprocess data
+  - Generate historical and lag-based features
+  - Apply BTC (Back-Time Consistent) train/validation split
+  - Train CatBoost and Ridge models
+  - Optimize blending weight using validation RMSE
+  - Generate model explanations (Feature Importance, SHAP, LIME)
+  - Retrain on full data and predict test set results
 3. The final prediction file will be saved
 
 ## Contributing
 1. Fork the repository 
 2.Create a new branch:
    > git checkout -b feature/NewFeature
+   
 3.Commit your changes:
    > git commit -m "Add new feature"
+
 4.Push the branch:
   > git push origin feature/NewFeature
+
 5.Open a Pull Request
 
 ## Maintainers
