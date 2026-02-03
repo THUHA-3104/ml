@@ -1,4 +1,4 @@
-# Learning Progress Prediction – Academic Risk Management
+# Learning Progress Prediction 
 ## Project Overview
 This project aims to predict students’ learning progress by forecasting the number of credits completed (`TC_HOANTHANH`) at the end of a semester.  
 The primary objective is to support **early academic risk detection** and enable **proactive decision-making** in higher education management.
